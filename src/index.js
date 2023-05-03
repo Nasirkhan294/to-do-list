@@ -20,7 +20,7 @@ const tasks = [
 ];
 
 // Define a function that renders the tasks onto the screen
-function renderTasks() {
+const renderTasks = () => {
   // Get the HTML element that will contain the tasks
   const todoList = document.getElementById('todo-list');
   // Clear the HTML element of any previous content
@@ -39,7 +39,7 @@ function renderTasks() {
     }
     todoList.appendChild(li);
   });
-}
+};
 
 // Call the function to initially render the tasks on the screen
 renderTasks();
