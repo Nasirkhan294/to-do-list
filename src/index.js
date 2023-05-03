@@ -1,45 +1,62 @@
 import './styles.css';
+// Grab the elements from the HTML document
+const inputTask = document.querySelector('#new-task');
+const todoList = document.querySelector('#todo-list');
+const addBtn = document.querySelector('.btn');
+const alertElement = document.querySelector('.alert');
 
-// Define the tasks as an array of objects, each representing a task
-const tasks = [
-  {
-    description: 'Buy milk',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Do laundry',
-    completed: true,
-    index: 2,
-  },
-  {
-    description: 'Clean the house',
-    completed: false,
-    index: 3,
-  },
-];
-
-// Define a function that renders the tasks onto the screen
-const renderTasks = () => {
-  // Get the HTML element that will contain the tasks
-  const todoList = document.getElementById('todo-list');
-  // Clear the HTML element of any previous content
-  todoList.innerHTML = '';
-
-  // Sort the tasks by their index, so they appear in order
-  tasks.sort((a, b) => a.index - b.index);
-
-  // Loop through each task, create an HTML element for it, and add it to the todoList
-  tasks.forEach((task) => {
-    const li = document.createElement('li');
-    li.innerHTML = task.description;
-    // If the task is completed, add a class to the HTML element to show that
-    if (task.completed) {
-      li.classList.add('completed');
-    }
-    todoList.appendChild(li);
-  });
+// Save the tasks in the local storage
+const saveTask = () => {
+  localStorage.setItem('tasks', todoList.innerHTML);
 };
 
-// Call the function to initially render the tasks on the screen
-renderTasks();
+// Add a new task to the list
+const addTask = () => {
+  if (inputTask.value === '') {
+    alertElement.style.display = 'flex';
+    saveTask();
+  } else {
+    const li = document.createElement('li');
+    li.textContent = inputTask.value;
+    todoList.appendChild(li);
+    const span = document.createElement('span');
+    span.textContent = '\u00d7';
+    li.appendChild(span);
+    alertElement.style.display = 'none';
+    saveTask();
+  }
+  inputTask.value = '';
+};
+
+// Toggle the "checked" class when clicking on a task
+const toggleChecked = (e) => {
+  if (e.target.tagName === 'LI') {
+    e.target.classList.toggle('checked');
+    saveTask();
+  }
+};
+
+// Remove a task when clicking on the delete button
+const removeTask = (e) => {
+  if (e.target.tagName === 'SPAN') {
+    e.target.parentElement.remove();
+    saveTask();
+  }
+};
+
+// Show the tasks saved in the local storage
+const showTasks = () => {
+  try {
+    todoList.innerHTML = localStorage.getItem('tasks');
+  } catch (e) {
+    console.log('Error getting tasks from local storage:', e);
+  }
+};
+
+// Add event listeners
+addBtn.addEventListener('click', addTask);
+todoList.addEventListener('click', toggleChecked);
+todoList.addEventListener('click', removeTask);
+
+// Show the tasks when the page loads
+showTasks();
