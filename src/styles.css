@@ -96,6 +96,7 @@ h1 {
 
 .tasks li span {
   margin-left: 0.5em;
+  padding-right: 1em;
 }
 
 .tasks li .delete,

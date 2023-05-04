@@ -25,13 +25,27 @@ const populateList = () => {
       deleteTask(task.index);
       populateList();
     });
+
     const editButton = taskElement.querySelector('.edit');
     editButton.addEventListener('click', () => {
-      const newDescription = prompt('Enter a new description:', task.description);
-      if (newDescription) {
-        editTask(task.index, newDescription);
-        populateList();
-      }
+      const taskDescription = taskElement.querySelector('span');
+      taskDescription.setAttribute('contentEditable', true);
+      taskDescription.focus();
+      taskDescription.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          // prevent default submitting behavior
+          event.preventDefault();
+          const newDescription = taskDescription.innerText.trim();
+          editTask(task.index, newDescription);
+          populateList();
+          taskDescription.setAttribute('contentEditable', false);
+        } else if (event.key === 'Escape') {
+          // prevent default closing behavior
+          event.preventDefault();
+          taskDescription.innerText = task.description;
+          taskDescription.setAttribute('contentEditable', false);
+        }
+      });
     });
     todoList.appendChild(taskElement);
   });
