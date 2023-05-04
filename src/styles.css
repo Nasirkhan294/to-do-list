@@ -98,12 +98,13 @@ h1 {
   margin-left: 0.5em;
 }
 
-.tasks li .delete, .edit {
+.tasks li .delete,
+.edit {
   position: absolute;
   top: 0.2em;
   color: #dbdada;
   background-color: #504f4f;
-  font-size: .7em;
+  font-size: 0.7em;
   width: 1.5em;
   height: 1.5em;
   border-radius: 40%;
