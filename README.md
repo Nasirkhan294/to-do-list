@@ -44,7 +44,7 @@
 ### Key Features <a name="key-features"></a>
 
 - [x] **Single Page App**
-- [x] **Add and Remove Functionality**
+- [x] **Add, Remove, Edit and Delete Functionality**
 - [x] **Medium Fidelity Design**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
