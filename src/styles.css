@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 html {
   font-size: 16px;
 }
@@ -7,7 +13,7 @@ html {
 body {
   font-family: 'Lato', sans-serif;
   font-size: 1em;
-  background-color: #dbdada;
+  background: linear-gradient(135deg, #6cdbe9, #105e7b);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,20 +26,118 @@ main {
   background-color: #fff;
   width: 40%;
   text-align: center;
+  padding: 2em;
+  border-radius: 2em;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
-  border-bottom: 1px solid #504f4f;
   padding-bottom: 0.5em;
 }
 
-.lists {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+#alert {
+  display: none;
+  color: #f45434;
+  align-self: flex-start;
+  margin-left: 1em;
 }
 
-.lists li {
-  margin-bottom: 1.5em;
-  font-size: 1.5em;
+.add-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #dbdada;
+  border-radius: 2em;
+}
+
+#new-task {
+  flex: 1;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding-left: 2em;
+  color: #504f4f;
+  font-size: 1em;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 1em 2em;
+  background-color: #504f4f;
+  color: #dbdada;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 2em;
+}
+
+.btn:hover {
+  background-color: #343232;
+  color: #fff;
+}
+
+.tasks {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.tasks li {
+  flex: 1;
+  list-style: none;
+  padding: 0 0.75em;
+  font-size: 1.2em;
+  position: relative;
+  align-self: flex-start;
+  margin-bottom: 1em;
+}
+
+.tasks li span {
+  margin-left: 0.5em;
+}
+
+.tasks li .delete,
+.edit {
+  position: absolute;
+  top: 0.2em;
+  color: #dbdada;
+  background-color: #504f4f;
+  font-size: 0.7em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+}
+
+.tasks li .delete {
+  left: 34.5em;
+}
+
+.tasks li .delete:hover {
+  background-color: #343232;
+  color: #fff;
+}
+
+.tasks li .edit {
+  left: 32em;
+}
+
+.tasks li .edit:hover {
+  background-color: #343232;
+  color: #fff;
+}
+
+button {
+  margin-top: 5em;
+  padding: 1em;
+  border-radius: 2em;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  background-color: #dbdada;
 }
