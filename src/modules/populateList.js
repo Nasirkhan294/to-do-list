@@ -16,7 +16,9 @@ const populateList = () => {
       <button class="delete"><i class="fa-solid fa-trash"></i></button>
     `;
     const checkbox = taskElement.querySelector('input[type="checkbox"]');
+    const spanElement = taskElement.querySelector('span');
     checkbox.addEventListener('change', () => {
+      spanElement.classList.toggle('checked');
       task.completed = !task.completed;
       saveTasks();
     });
@@ -60,13 +62,13 @@ document.querySelector('.add-task .btn').addEventListener('click', () => {
   }
 });
 
-document.querySelector('button[type="reset"]').addEventListener('click', () => {
-  tasks = tasks.filter((task) => !task.completed);
-  tasks.forEach((task, index) => {
-    task.index = index;
+document.querySelector('#reset').addEventListener('click', () => {
+  const updatedTasks = tasks.filter((task) => !task.completed);
+  updatedTasks.forEach((task, index) => {
+    task.index = index + 1;
   });
-  saveTasks();
-  populateList();
+  localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  document.location.reload();
 });
 
 export default populateList();
