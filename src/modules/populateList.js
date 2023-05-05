@@ -4,6 +4,7 @@ import {
 
 const newTaskInput = document.getElementById('new-task');
 const todoList = document.getElementById('todo-list');
+const alertElement = document.getElementById('alert');
 
 const populateList = () => {
   todoList.innerHTML = '';
@@ -54,11 +55,14 @@ const populateList = () => {
 };
 
 document.querySelector('.add-task .btn').addEventListener('click', () => {
-  const description = newTaskInput.value.trim();
-  if (description) {
-    addTask(description);
+  const description = newTaskInput.value;
+  if (description === '') {
+    alertElement.style.display = 'flex';
+  } else {
+    addTask(description.trim());
     populateList();
     newTaskInput.value = '';
+    alertElement.style.display = 'none';
   }
 });
 
