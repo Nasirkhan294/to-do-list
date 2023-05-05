@@ -23,6 +23,8 @@ export function deleteTask(index) {
 }
 
 export function editTask(index, newDescription) {
-  tasks[index].description = newDescription;
-  saveTasks();
+  if (tasks[index]) {
+    tasks[index].description = newDescription;
+    saveTasks();
+  }
 }

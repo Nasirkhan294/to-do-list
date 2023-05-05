@@ -4,6 +4,7 @@ import {
 
 const newTaskInput = document.getElementById('new-task');
 const todoList = document.getElementById('todo-list');
+const alertElement = document.getElementById('alert');
 
 const populateList = () => {
   todoList.innerHTML = '';
@@ -16,7 +17,9 @@ const populateList = () => {
       <button class="delete"><i class="fa-solid fa-trash"></i></button>
     `;
     const checkbox = taskElement.querySelector('input[type="checkbox"]');
+    const spanElement = taskElement.querySelector('span');
     checkbox.addEventListener('change', () => {
+      spanElement.classList.toggle('checked');
       task.completed = !task.completed;
       saveTasks();
     });
@@ -52,21 +55,24 @@ const populateList = () => {
 };
 
 document.querySelector('.add-task .btn').addEventListener('click', () => {
-  const description = newTaskInput.value.trim();
-  if (description) {
-    addTask(description);
+  const description = newTaskInput.value;
+  if (description === '') {
+    alertElement.style.display = 'flex';
+  } else {
+    addTask(description.trim());
     populateList();
     newTaskInput.value = '';
+    alertElement.style.display = 'none';
   }
 });
 
-document.querySelector('button[type="reset"]').addEventListener('click', () => {
-  tasks = tasks.filter((task) => !task.completed);
-  tasks.forEach((task, index) => {
-    task.index = index;
+document.querySelector('#reset').addEventListener('click', () => {
+  const updatedTasks = tasks.filter((task) => !task.completed);
+  updatedTasks.forEach((task, index) => {
+    task.index = index + 1;
   });
-  saveTasks();
-  populateList();
+  localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  document.location.reload();
 });
 
 export default populateList();

@@ -43,6 +43,10 @@ h1 {
   margin-left: 1em;
 }
 
+.checked {
+  text-decoration: line-through;
+}
+
 .add-task {
   display: flex;
   justify-content: space-between;
